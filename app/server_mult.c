@@ -9,7 +9,7 @@
 #include "include/mid.h"
 
 #define BUFFER_MAX_SIZE 256
-#define IP_ADDRESS
+#define IP_ADDRESS 127.0.0.1
 #define IP_PORT	8888
  
 //void *connection_handler(void *);

@@ -1,29 +1,18 @@
+#include "include/ds.h"
 
-#include "include/type.h"
-#include "include/errors.h"
+//#define CHIP CHIP##AAAA
+#include "driver/chips/chipA.c"
 
-
-ERR_CODE i2c_driver(void *data)
+int driver_init(struct system *p)
 {
-	ERR_CODE ret;
-	return ret;
-}
+	//function pointer mapping for each arch
+//#ifdef CHIP_A
+	p->gpio_driver = chipA_gpio_drv;
+	p->i2c_driver = chipA_i2c_drv;
+	p->spi_driver = chipA_spi_drv;
+	p->net_driver = chipA_net_drv;
+//#endif //CHIP_A
 
-ERR_CODE spi_driver(void *data)
-{
-	ERR_CODE ret;
-	return ret;
-}
-
-ERR_CODE net_driver(void *data)
-{
-	ERR_CODE ret;
-	return ret;
-}
-
-ERR_CODE gpio_driver(void *data)
-{
-	ERR_CODE ret;
-	return ret;
+	return 0;
 }
 

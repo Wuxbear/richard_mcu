@@ -6,6 +6,10 @@
 #include "include/type.h"
 #include "include/driver.h"
 #include "include/errors.h"
+#include "include/ds.h"
+
+struct system sys;
+struct system *sysp = &sys;
 
 struct cmdcast {
 	s8 *cmd;
@@ -14,6 +18,13 @@ struct cmdcast {
 
 s8 cmd[32] = {0};
 s8 data[128] = {0};
+
+ERR_CODE cmd_sysinfo(void)
+{
+	//sysinfo func
+	printf("sysinfo! data: %s\n", data);
+	return ERR_NONE;
+}
 
 ERR_CODE cmd_selftest(void)
 {
@@ -50,6 +61,7 @@ ERR_CODE cmd_gpio(void)
 }
 
 struct cmdcast cmdlist[] = {
+	{"sysinfo", cmd_sysinfo},
 	{"selftest", cmd_selftest},
 	{"gpio",  cmd_gpio},
 	{"sensor",  cmd_sensor},
@@ -76,5 +88,19 @@ ERR_CODE cmd_process(s8 *cbuf)
 	}	
 
 	return ERR_NOCMD;
+}
+
+int system_init(void)
+{
+	sysp->sw_version = "v0.0.0";
+	sysp->hw_version = "platformA_v0";
+
+	//ipv4, ipv6?
+	strncpy (sysp->ip_address, "127.0.0.1", 10);
+	sysp->ip_port = 9999;
+		
+
+	driver_init();
+
 }
 

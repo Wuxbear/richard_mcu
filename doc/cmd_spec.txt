@@ -1,0 +1,6 @@
+
+
+cmd	description	data format					Example data array
+i2c_read	read	command_ID, read, address, register		00 01 00 AA BB CC
+i2c_write	write 	command_ID, write, address, register, data	01 02 00 AA BB CC DD
+
